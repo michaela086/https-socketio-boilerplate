@@ -21,7 +21,7 @@ var passport = require('passport');
 var functions = require('./functions.js')(io);
 
 httpapp.get('*', function(req,res) {
-    res.redirect('https://127.0.0.1:8080' + req.url);
+    res.redirect('https://' + server_config.serverip + ':' + serverhttpport + req.url);
 });
 
 var routes = require('./routes.js')(app, functions, io);
