@@ -17,6 +17,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
+var mongoose = require('mongoose');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 var functions = require('./functions.js')(io);
@@ -62,7 +63,7 @@ passport.use(new FacebookStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         process.nextTick(function () {
-        //functions.saveUser(profile);
+            functions.saveUser(profile);
             return done(null, profile);
         });
     }
