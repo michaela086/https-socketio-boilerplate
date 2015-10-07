@@ -19,3 +19,24 @@
 
     </script>
 </html>
+
+
+{% extends 'layout.html' %}
+
+{% block title %}{% parent %} | {{ title }}{% endblock %}
+
+{% block head %}
+  {% parent %}
+{% endblock %}
+
+{% block content %}
+    <a href="/account" class="button">Go to My Account</a>
+{% endblock %}
+
+{% block footer %}
+  {% parent %}
+{% endblock %}
+
+{% block loadlast %}
+  {% parent %}
+{% endblock %}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% block head %}
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MRL</title>
+        <link rel="stylesheet" href="/css/foundation.css" />
+        <link rel="stylesheet" href="/css/main.css" />
+        <script src="/js/vendor/modernizr.js"></script>
+        <script src="/js/vendor/jquery.js"></script>
+        <script src="/js/vendor/foundation.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+
+        <script>
+            var socket = io.connect('http://{{ globalData.settings.serverip }}:{{ globalData.settings.serverport }}');
+        </script>
+
+        <script src="/js/main.js"></script>
+        <script src="/js/socket_io.js"></script>
+        <script src="/js/vendor/notify.min.js"></script>
+    </head>
+{% endblock %}
+    <body>
+    {% block nav %}
+    {% endblock %}
+    
+        <div class="page-wrapper container">
+          {% block messages %}
+              {% if messages %}
+                {% for type, message in messages %}
+                  <div class="messages" id="messages">
+                    {% if type == 'success' || type == 'info' || type == 'warning' || type == 'danger' %}
+                    <div class="alert alert-{{type}}" role="alert">{{message|safe}}</div>
+                    {% else %}
+                    <div class="alert alert-danger" role="alert"><p>{{message|safe}}</p></div>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              {% endif %}
+          {% endblock %}
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <!--<img class="logo" src="/images/logo_all.png"></img>-->
+            </div>
+          </div>
+        {% block content %}
+        {% endblock %}
+        </div>
+
+    {% block footer %}
+        <footer class="footer">
+            <div class="container">
+                <p class="text-center"><a href="/">Bills</a></p>
+            </div>
+        </footer>
+    {% endblock %}
+
+    {% block loadlast %}
+        
+    {% endblock %}
+
+</body>

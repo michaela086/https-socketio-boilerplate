@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% parent %} | {{ title }}{% endblock %}
+
+{% block head %}
+  {% parent %}
+{% endblock %}
+
+{% block content %}
+    <a href="/auth/facebook" class="button">Login with Facebook</a>
+{% endblock %}
+
+{% block footer %}
+  {% parent %}
+{% endblock %}
+
+{% block loadlast %}
+  {% parent %}
+{% endblock %}
