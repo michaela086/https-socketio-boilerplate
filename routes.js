@@ -29,6 +29,18 @@ module.exports = function(app, functions, io) {
         });
     });
 
+    app.get('/auction/*', functions.ensureAuthenticated, function(req, res) {
+        var auction_id = req.params[0];
+        console.log(auction_id);
+        functions.loadGlobalData(function (globalData) {
+            res.render('auction', {
+                globalData: globalData,
+                auctionId: auction_id,
+                user: req.user
+            });
+        });
+    });
+
     app.get('/auth/facebook',
         passport.authenticate('facebook'),
         function(req, res){

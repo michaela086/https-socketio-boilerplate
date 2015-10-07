@@ -3,9 +3,7 @@
 {% block title %}{% parent %} | {{ user.displayName }}{% endblock %}
 
 {% block content %}
-    <a href="logout" class="button">Logout</a>
-    <br/>{{ user|json|safe }}
-    <br/><a href="/auction/12345">auction 12345</a>
+    {{ auctionId }}
 {% endblock %}
 
 {% block footer %}
