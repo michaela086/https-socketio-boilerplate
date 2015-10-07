@@ -22,7 +22,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var functions = require('./functions.js')(io);
 
 httpapp.get('*', function(req,res) {
-    res.redirect('https://' + server_config.serverip + ':' + server_config.serverhttpport + req.url);
+    res.redirect('https://' + server_config.serverip + ':' + server_config.serverport + req.url);
 });
 
 app.engine('html', swig.renderFile);

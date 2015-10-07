@@ -1,9 +1,10 @@
 {% extends 'layout.html' %}
 
-{% block title %}{% parent %} | My Account{% endblock %}
+{% block title %}{% parent %} | {{ user.displayName }}{% endblock %}
 
 {% block content %}
-    <a href="/account" class="button">Go to My Account</a>
+    <a href="logout" class="button">Logout</a>
+    <br/>{{ user|json|safe }}
 {% endblock %}
 
 {% block footer %}

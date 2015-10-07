@@ -1,7 +1,7 @@
 module.exports = function(app, functions, io) {
 
     var passport = require('passport');
-    
+
     app.get('/', functions.ensureAuthenticated, function(req, res) {
         functions.loadGlobalData(function (globalData) {
             res.render('index', {
@@ -12,7 +12,21 @@ module.exports = function(app, functions, io) {
     });
 
     app.get('/login', function(req, res) {
-        res.render('login', { user: req.user });
+        functions.loadGlobalData(function (globalData) {
+            res.render('login', {
+                globalData: globalData,
+                user: req.user
+            });
+        });
+    });
+
+    app.get('/account', functions.ensureAuthenticated, function(req, res) {
+        functions.loadGlobalData(function (globalData) {
+            res.render('account', {
+                globalData: globalData,
+                user: req.user
+            });
+        });
     });
 
     app.get('/auth/facebook',
@@ -23,7 +37,7 @@ module.exports = function(app, functions, io) {
     app.get('/auth/facebook/callback', 
         passport.authenticate('facebook', { failureRedirect: '/login' }),
         function(req, res) {
-            res.redirect('/');
+            res.redirect('/account');
         });
 
     app.get('/logout', function(req, res) {
