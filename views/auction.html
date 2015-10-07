@@ -3,13 +3,53 @@
 {% block title %}{% parent %} | {{ user.displayName }}{% endblock %}
 
 {% block content %}
-    {{ auctionId }}
+    Auction: {{ auctionId }}
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <label for="current_bid" class="col-sm-2 control-label">Current Bid</label>
+            <div class="col-sm-2">
+                <input class="form-control" id="current_bid" value="{{ currentBid }}" disabled>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="new_bid" class="col-sm-2 control-label">New Bid</label>
+            <div class="col-sm-2">
+                <input class="form-control" id="new_bid" value="12345">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" id="new_bid_submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+
+    </div>
 {% endblock %}
 
 {% block footer %}
-  {% parent %}
+    {% parent %}
 {% endblock %}
 
 {% block loadlast %}
-  {% parent %}
+    {% parent %}
+    <script type="text/javascript">
+        $("#new_bid_submit").click(function(event) {
+            var new_bid_amount = $("#new_bid").val();
+            $.ajax({
+                url: "/api/new_bid",
+                method: "POST",
+                data: {
+                    auction_id: '{{ auctionId }}',
+                    new_bid: new_bid_amount
+                },
+                dataType: "html",
+                success: function(result) {
+                    console.log(result);
+                }
+            });
+        });
+    </script>
 {% endblock %}

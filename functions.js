@@ -30,6 +30,27 @@ module.exports = function(io) {
         return cb(data);
     };
 
+    functions.getCurrentBid = function(auctionId, cb) {
+        var data = 0;
+        models.Bid.findOne({ auctionId: auctionId }).sort({ timestamp: 'desc' }).exec(function(err, currentBid) {
+            if (currentBid && currentBid.amount > 0) {
+                data = currentBid.amount;
+            } 
+            return cb(data);
+        });
+    };
+
+    functions.saveNewBid = function(data) {
+        var bid = new models.Bid();
+        bid.auctionId = data.auctionId;
+        bid.userId = data.userId;
+        bid.amount = data.amount;
+
+        bid.save(function(err) {
+            if (err) { console.log(err); }
+        });
+    };
+
     functions.ensureAuthenticated = function(req, res, next) {
         if (req.isAuthenticated()) { return next(); }
         res.redirect('/login');

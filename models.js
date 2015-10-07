@@ -10,3 +10,9 @@ module.exports.User = db.model('User', {
     provider: String
 });
 
+module.exports.Bid = db.model('Bid', {
+    auctionId: String,
+    userId: String,
+    amount: Number,
+    timestamp: { type: Date, default: Date.now }
+});
